@@ -2,7 +2,7 @@
 
 var activateSession = function (userId, callback) {
     $.ajax({
-        "url": "/api/activeSession?userId=" + userId,
+        "url": "/api/activeSession?userId=" + userId + "&v=" + new Date().getTime(),
         "type": "GET",
         "success": function (data) {
             if (typeof data === "string") {
@@ -24,7 +24,7 @@ var activateSession = function (userId, callback) {
 };
 
 var updateScores = function (options, callback) {
-    var url = "/api/updateScores?userId=" + options.userId + "&sessionId=" + options.sessionId + "&score=" + options.score;
+    var url = "/api/updateScores?userId=" + options.userId + "&sessionId=" + options.sessionId + "&score=" + options.score + "&v=" + new Date().getTime();
     if (!options.userId || !options.sessionId || !options.score) {
         if (typeof callback === "function") {
             callback("Error updating Score", null);
@@ -112,7 +112,7 @@ $(function() {
     var smileyImgObj = $('#smileyImg');
     var restartTextObj = $('#restart_text');
 
-    var audio = new Audio('./audio/carAccelaratingAudio.mp3');
+    var audio = new Audio('./audio/engine.mp3');
     var high_score = localStorage.getItem('high_score');
     $('#high_score').text(high_score);
 
@@ -337,8 +337,14 @@ $(function() {
         if (score_counter % 20 == 0) {
             score.text(parseInt(score.text()) + 1);
         }
-        if (score_counter % 500 == 0) {
+        
+        if (score_counter % 300 == 0) {
             speed++;
+            if(speed>5){
+                audio.src = './audio/carAccelaratingAudio.mp3';
+            }else if(speed>=2 && speed<=3){
+                audio.src = './audio/bus.mp3';
+            }
             line_speed++;
         }
 
@@ -419,37 +425,52 @@ $(function() {
         var w2 = $div2.outerWidth(true);
         var b2 = y2 + h2;
         var r2 = x2 + w2;
+        let counter = 0;
+        let faceStr = "smiling";
+        setInterval(function(){
+            if(counter==3) counter=0;
+            
+            smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
+            counter++;
+        },2000);
 
 
         if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
         var xxx_score = parseInt(score.text());
         if(xxx_score<20){
             restartTextObj.text("That so Poor of You!");
-            smileyImgObj.attr("src", "./svg/sad0.svg");
+            faceStr = "sad";
+            smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
         }
         else if(xxx_score>=20 && xxx_score<30){
             restartTextObj.text("That was Bad");
-            smileyImgObj.attr("src", "./svg/sad1.svg");
+            faceStr = "sad";
+            smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
         }
         else if(xxx_score>=30 && xxx_score<60){
             restartTextObj.text("Good , You can do Better");
-            smileyImgObj.attr("src", "./svg/smiling0.svg");
+            faceStr = "smiling";
+            smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
         }
         else if(xxx_score>=60 && xxx_score<90){
             restartTextObj.text("Great! Marching towards the Peak");
-            smileyImgObj.attr("src", "./svg/smiling1.svg");
+            faceStr = "smiling";
+            smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
         }
         else if(xxx_score>=90 && xxx_score<120){
-            restartTextObj.text("Voilla!! ");
-            smileyImgObj.attr("src", "./svg/smiling2.svg");
+            restartTextObj.text("Voilla!!Race for more ");
+            faceStr = "happy";
+            smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
         }
         else if(xxx_score>=120 && xxx_score<150){
             restartTextObj.text("Superb !Awesome! ");
-            smileyImgObj.attr("src", "./svg/happy0.svg");
+            faceStr = "happy";
+            smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
         }
         else if(xxx_score>=150){
             restartTextObj.text("Fantabulous !Outstanding! ");
-            smileyImgObj.attr("src", "./svg/happy1.svg");
+            faceStr = "happy";
+            smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
         }
 
         return true;

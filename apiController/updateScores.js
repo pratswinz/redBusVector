@@ -6,19 +6,25 @@ module.exports = (req, res, next) => {
         .then(connector => {
             const dbo = connector.db("vector-db");
             const query = { userId: req.query.userId };
-            dbo.collection("scores").find(query).forEach((doc) => {
-                doc.totalScore += parseInt(req.query.score);
-                doc.sessionList.forEach(event => {
-                    if (event.sessionId === req.query.sessionId) {
-                        event.sessionEndTime = moment().format("YYYY-MM-DD HH:mm");
-                        event.score = req.query.score;
-                        doc.sessionActive = false;
-                    }
+            const sessionId = req.query.sessionId || "";
+            const score = typeof req.query.score === "number" ? req.query.score : 0;
+            if (sessionId != "") {
+                dbo.collection("scores").find(query).forEach((doc) => {
+                    doc.totalScore += score;
+                    doc.sessionList.forEach(event => {
+                        if (event.sessionId === sessionId) {
+                            event.sessionEndTime = moment().format("YYYY-MM-DD HH:mm");
+                            event.score = score;
+                            doc.sessionActive = false;
+                        }
+                    })
+                    dbo.collection("scores").save(doc);
+                    // connector.close();
+                    res.send("Updated records");
                 })
-                dbo.collection("scores").save(doc);
-                connector.close();
-                res.send("Updated records");
-            })
+            } else {
+                res.send("");
+            }
         }).catch(err => {
             console.log("Error ", err);
         })

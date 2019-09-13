@@ -19,7 +19,7 @@ module.exports = (req, res, next) => {
                     const sessionObj = { $set:{sessionActive: true}, $push: {sessionList: { sessionId: sessionId, sessionStartTime:  moment().format("YYYY-MM-DD HH:mm"), sessionEndTime: null, score: 0} }};
                     dbo.collection("scores").updateOne(query, sessionObj, (err, resultRec) => {
                         if(err) throw err;
-                        connector.close();
+                        // connector.close();
                         res.send(sessionId);
                     })
                 }else{
@@ -38,12 +38,12 @@ module.exports = (req, res, next) => {
                             score: 0
                         }
                     ],
-                    totalScores: 0
+                    totalScore: 0
                 };
                 const dbo = connector.db("vector-db");
                 dbo.collection("scores").insertOne(sessionObj,(err, resultRec) => {
                     if(err) throw err;
-                    connector.close();
+                    // connector.close();
                     res.send(sessionId);
                 })
             }
