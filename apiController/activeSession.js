@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
             if(result.length === 1){
                 if(!result[0].sessionActive){
                     const sessionId = uuid.v4();
-                    const sessionObj = { $push: {sessionList: { sessionId: sessionId, sessionStartTime:  moment().format("YYYY-MM-DD HH:mm"), sessionEndTime: null, score: 0} }};
+                    const sessionObj = { $set:{sessionActive: true}, $push: {sessionList: { sessionId: sessionId, sessionStartTime:  moment().format("YYYY-MM-DD HH:mm"), sessionEndTime: null, score: 0} }};
                     dbo.collection("scores").updateOne(query, sessionObj, (err, resultRec) => {
                         if(err) throw err;
                         connector.close();

@@ -11,10 +11,13 @@ module.exports = (req, res, next) => {
             doc.sessionList.forEach(event => {
                 if(event.sessionId === req.query.sessionId){
                     event.sessionEndTime = moment().format("YYYY-MM-DD HH:mm");
+                    event.score = doc.totalScore;
                     doc.sessionActive = false;
                 }
             })
             dbo.collection("scores").save(doc);
+            connector.close();
+            res.send("Logged out")
         });
         
     })
