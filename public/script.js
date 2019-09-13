@@ -1,6 +1,5 @@
 /* Prateek Srivastava */
 $(function() {
-
     var anim_id;
 
     //saving dom objects to variables
@@ -50,14 +49,23 @@ $(function() {
         document.getElementById("mySidenav").style.width = "0";        
     });
 
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-    }
-    
-    /* Set the width of the side navigation to 0 */
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-    }
+    $('#offer').on('click',function(){
+        $('.offer_container')[0].classList.remove('hide');
+        // location.href = '/offer.html';
+        $('#closeNav').click();
+        // document.getElementsByClassName('offer_container')[0].classList.remove('hide');
+        // $.ajax( "/api/board" )
+        //     .done(function(res) {
+        //         console.log(res);
+        //     })
+        //     .fail(function() {
+        //         console.log('error')
+        //     })
+    });
+
+    $("#closeCard").on('click', function(){
+        $('.offer_container')[0].classList.add('hide');
+    });
 
     /**
      * ================end here================
