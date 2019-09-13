@@ -5,10 +5,10 @@ module.exports = (req, res, next) => {
     .then(connector => {
         const dbo = connector.db("vector-db");
         const sortQuery = { totalScore: -1 };
-        dbo.collection("scores").find().sort(sortQuery).limit(25).toArray((err, result) => {
+        dbo.collection("scores").find().sort(sortQuery).limit(3).toArray((err, result) => {
             if(err) throw err;
             connector.close();
-            res.send("Sent");
+            res.send(result);
         })
     })
 }
