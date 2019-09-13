@@ -55,8 +55,8 @@ var updateScores = function (options, callback) {
     });
 };
 
-var getScores = function (callback) {
-    var url = "/api/leaderboard";
+var getScores = function (userId, callback) {
+    var url = "/api/leaderboard?userId="+userId;
     $.ajax({
         "url": url,
         "type": "GET",
@@ -162,6 +162,38 @@ $(function() {
     });
     /**
      * ===========end here=============
+     */
+
+    /**
+     * on click leadership board
+     */
+    $("#closeBoard").on('click', function(){
+        $(".leadership")[0].classList.add('hidden');
+    });
+
+    $('#board').on('click', function(){
+        $('#closeNav').click();
+        getScores(userId, function(error, data){
+            if(!error && data){
+                let board = '';
+                for(let i = 0; i < data.length; i++){
+                    board += `<div class="row">
+                                <span class="userId">${data[i].userId}</span>
+                                <span class="score">${data[i].totalScore}</span>
+                            </div>`
+                }
+                $(".leadership").html(board);
+            }else{
+                $(".boardScore").html(`<span class="no_data"></span>
+                                         <span>Data is not available currently</span>
+                                        `);
+            }
+            $(".leadership")[0].classList.remove('hidden');
+
+        })
+    });
+    /**
+     * ============end here ===============
      */
 
     /**

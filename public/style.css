@@ -8,11 +8,11 @@ body {
 }
 
 .hidden{
-    display: none;
+    visibility: hidden;
 }
 
 .hide{
-    left:-500px;
+    left:-100%;
 }
 
 #openNav{
@@ -89,6 +89,30 @@ body {
         overflow: hidden;
         background-image: url(./images/asfalt-dark.png);
     }
+
+    .leadership{
+        position: fixed;
+        top:0;
+        height:100vh;
+        background: #ffffff;
+        padding-top:40%;
+        z-index: 1;
+        width: 100%;
+    }
+
+    .leadership>div{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .leadership .no_data{
+        background: url(./image/stop.png);
+        width: 100px;
+        height: 95px;
+        display: block;
+        background-size: contain;
+    }
 }
 
 @media screen 
@@ -106,6 +130,9 @@ body {
         background-color: rgb(98, 99, 98);/* linear-gradient(rgb(75, 74, 74), rgb(213, 218, 213)); */
         overflow: hidden;
         background-image: url(./images/asfalt-dark.png);
+    }
+    .game_controls_button{
+        display: none;
     }
 }
 

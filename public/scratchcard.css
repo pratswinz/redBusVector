@@ -18,7 +18,7 @@
     -ms-user-select: none; 
     -o-user-select: none;
     user-select: none;
-    margin-top:42%;
+    margin-top:15%;
   }
   
   .canvas {
@@ -42,7 +42,7 @@
     margin: 0 auto;
   }
 
-  #closeCard{
+  #closeCard, #closeBoard{
     font-size: 3em;
     cursor: pointer;
     position: absolute;
@@ -50,4 +50,44 @@
     right: 10px;
     z-index:2;
     color:#000000;
+  }
+
+  .offers{
+    display: flex;
+    margin-top: 1em;
+    background: #ffffff;
+    box-shadow: 0 1px #f0f0f0;
+    border: 1px solid #e2e2e2;
+    border-radius: 3px;
+    padding: 1em;
+    align-items: center;
+  }
+
+  .offers > .icon{
+    background: url(./image/discount.png);
+    width: 50px;
+    display: inline-block;
+    height: 35px;
+    background-size: contain;
+    margin-right:15px;
+  }
+
+  .offer_details{
+  
+  }
+
+  .offer_details > span{
+    display: block;
+  }
+
+  .offer_details > span:first-child{
+    font-weight: 600;
+    color: #d84e55;
+    font-size:0.875em;
+    margin-bottom: 8px;
+  }
+
+  .offer_details > span:last-child{
+    color:#555;
+    font-size: 0.75em;
   }
