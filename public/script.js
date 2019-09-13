@@ -129,15 +129,36 @@ $(function() {
         $('.offer_container')[0].classList.add('hide');
     });
 
-    /**
-     * ================end here================
-     */
-
-    /* ------------------------------GAME CODE STARTS HERE------------------------------------------- */
-
-
     /* Move the cars */
     $(document).on('keydown', function(e) {
+        keyDownFunc(e);
+    });
+
+    $('.top_arrow_btn').on('click',function(){
+        pressButton({keyCode:38});
+    });
+
+    $('.right_arrow_btn').on('click',function(){
+        pressButton({keyCode:39});
+    });
+
+    $('.bottom_arrow_btn').on('click',function(){
+        pressButton({keyCode:40});
+    });
+
+    $('.left_arrow_btn').on('click',function(){
+        pressButton({keyCode:37});
+    });
+
+    function pressButton(e){
+        let timerKey;
+        keyDownFunc(e);
+        timerKey = setTimeout(function(){
+            keyUpFunc(e);
+        },200); 
+    }
+
+    function keyDownFunc(e){
         if (game_over === false) {
             var key = e.keyCode;
             if (key === 37 && move_left === false) {
@@ -150,9 +171,9 @@ $(function() {
                 move_down = requestAnimationFrame(down);
             }
         }
-    });
+    }
 
-    $(document).on('keyup', function(e) {
+    function keyUpFunc(e){
         if (game_over === false) {
             var key = e.keyCode;
             if (key === 37) {
@@ -169,6 +190,10 @@ $(function() {
                 move_down = false;
             }
         }
+    }
+
+    $(document).on('keyup', function(e) {
+        keyUpFunc(e);
     });
 
     function left() {
@@ -304,6 +329,5 @@ $(function() {
         return true;
     }
 
-
-
+    
 });

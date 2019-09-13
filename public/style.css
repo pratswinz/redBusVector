@@ -1,9 +1,9 @@
 body {
-    height: 100%;
+    height: 100vh;
     width: 100%;
     margin: 0;
-    background-color: #45d678;
-    font-family: 'Montserrat', sans-serif;
+    background-color: #f59685;
+    background-image: url(./images/asfalt-dark.png);
 }
 
 .hide{
@@ -26,13 +26,14 @@ body {
   and (-webkit-min-device-pixel-ratio: 2) {
     #container{
         position: relative;
-        height: 80vh;
+        height: 83vh;
         width: 93%;
         margin-right: auto;
         margin-left: auto;
-        margin-top: 20px;
-        background: linear-gradient(rgb(100, 98, 98), rgb(190, 194, 190));
+        margin-top: 2px;
+        background-color: rgb(98, 99, 98);/* linear-gradient(rgb(100, 98, 98), rgb(190, 194, 190)); */
         overflow: hidden;
+        background-image: url(./images/asfalt-dark.png);
     }
 }
 
@@ -43,13 +44,14 @@ body {
   and (min-resolution: 192dpi) { 
     #container{
         position: relative;
-        height: 70vh;
+        height: 83vh;
         width: 25%;
         margin-right: auto;
         margin-left: auto;
         margin-top: 20px;
-        background: linear-gradient(rgb(100, 98, 98), rgb(190, 194, 190));
+        background-color: rgb(98, 99, 98);/* linear-gradient(rgb(75, 74, 74), rgb(213, 218, 213)); */
         overflow: hidden;
+        background-image: url(./images/asfalt-dark.png);
     }
 }
 
@@ -267,12 +269,12 @@ body {
     text-align: center;
     font-size: 1em;
     width: 40%;
+    height: 7vh;
     background-color: white;
     color: #454545;
-    padding: 10px;
+    padding: 5px;
     box-shadow: 0px 0px 5px 2px #808080;
 }
-
 
 #help{
     text-align: center;
@@ -292,4 +294,41 @@ body {
 @keyframes blinkingText{
     0%{     color: #FFF;    }
     100%{   color: rgb(48, 26, 250);    }
+}
+
+.game_controls_button{
+    width: 90%;
+    height: 7vh;
+    margin: 0 auto;
+    display: flex;
+    position: relative;
+    text-align: center;
+    justify-content: space-around;
+    min-width: 100px;
+    align-items: center;
+}
+
+.arrow{
+    height: 30px;
+    width: 30px;
+    text-align: center;
+}
+
+.top_arrow_btn {
+    background: url('./svg/upArrow.svg');
+}
+
+.right_arrow_btn {
+    background: url('./svg/rightArrow.svg');
+
+}
+
+.bottom_arrow_btn {
+    background: url('./svg/downArrow.svg');
+
+}
+
+.left_arrow_btn {
+    background: url('./svg/leftArrow.svg');
+
 }
