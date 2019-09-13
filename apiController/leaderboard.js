@@ -7,7 +7,6 @@ module.exports = (req, res, next) => {
         const sortQuery = { totalScore: -1 };
         dbo.collection("scores").find().sort(sortQuery).limit(25).toArray((err, result) => {
             if(err) throw err;
-            console.log(result);
             connector.close();
             res.send("Sent");
         })
