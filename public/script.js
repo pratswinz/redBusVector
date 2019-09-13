@@ -393,8 +393,8 @@ $(function() {
         var w2 = $div2.outerWidth(true);
         var b2 = y2 + h2;
         var r2 = x2 + w2;
-        let counter = 0;
-        let faceStr = "smiling";
+        var counter = 0;
+        var faceStr = "smiling";
         setInterval(function(){
             if(counter==3) counter=0;
             
