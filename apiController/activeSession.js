@@ -8,6 +8,11 @@ module.exports = (req, res, next) => {
         const dbo = connector.db("vector-db");
         const query = {userId: req.query.userId};
         dbo.collection("scores").find(query).toArray((err, result) => {
+
+            if (!Array.isArray(result)) {
+                result = [];
+            }
+
             if(result.length === 1){
                 if(!result[0].sessionActive){
                     const sessionId = uuid.v4();

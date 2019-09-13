@@ -25,6 +25,12 @@ var activateSession = function (userId, callback) {
 
 var updateScores = function (options, callback) {
     var url = "/api/updateScores?userId=" + options.userId + "&sessionId=" + options.sessionId + "&score=" + options.score;
+    if (!options.userId || !options.sessionId || !options.score) {
+        if (typeof callback === "function") {
+            callback("Error updating Score", null);
+        }
+        return;
+    }
     $.ajax({
         "url": url,
         "type": "GET",
@@ -78,15 +84,15 @@ var getScores = function (callback) {
 $(function() {
 
     // Set the session ID for Game
-    var userId = "123456";
+    var userId = "";
     var sessionID = "";
-    activateSession(userId, function (err, sID) {
-        if (!err && sID) {
-            sessionID = sID;
-        } else {
-            sessionID = "";
-        }
-    });
+    // activateSession(userId, function (err, sID) {
+    //     if (!err && sID) {
+    //         sessionID = sID;
+    //     } else {
+    //         sessionID = "";
+    //     }
+    // });
 
     var anim_id;
 
@@ -103,6 +109,9 @@ $(function() {
     var restart_div = $('#restart_div');
     var restart_btn = $('#restart');
     var score = $('#score');
+    var smileyImgObj = $('#smileyImg');
+    var restartTextObj = $('#restart_text');
+
     var audio = new Audio('./audio/carAccelaratingAudio.mp3');
     var high_score = localStorage.getItem('high_score');
     $('#high_score').text(high_score);
@@ -126,6 +135,35 @@ $(function() {
     var move_left = false;
     var move_up = false;
     var move_down = false;
+    /**
+     * on username submit
+     */
+    if (localStorage.getItem("__@RB_name")) {
+        $('.overlay_input_container')[0].classList.add('hidden');
+        $('#main_container')[0].classList.remove('hidden');
+
+        userId = localStorage.getItem("__@RB_name");
+        sessionID = localStorage.getItem("__@RB_ssId");
+    }
+
+    $('#submit').on('click', function(){
+        userId = document.getElementById('userID').value;
+        activateSession(userId, function(error, data){
+            if (error) {
+                $('.error')[0].classList.remove('hidden');
+            } else if (data) {
+                localStorage.setItem("__@RB_name", userId);
+                localStorage.setItem("__@RB_ssId", data);
+                sessionID = data;
+                $('.overlay_input_container')[0].classList.add('hidden');
+                $('#main_container')[0].classList.remove('hidden');
+            }
+        })
+    });
+    /**
+     * ===========end here=============
+     */
+
     /**
      * On click of Hamburger Icon
      */
@@ -155,15 +193,36 @@ $(function() {
         $('.offer_container')[0].classList.add('hide');
     });
 
-    /**
-     * ================end here================
-     */
-
-    /* ------------------------------GAME CODE STARTS HERE------------------------------------------- */
-
-
     /* Move the cars */
     $(document).on('keydown', function(e) {
+        keyDownFunc(e);
+    });
+
+    $('.top_arrow_btn').on('click',function(){
+        pressButton({keyCode:38});
+    });
+
+    $('.right_arrow_btn').on('click',function(){
+        pressButton({keyCode:39});
+    });
+
+    $('.bottom_arrow_btn').on('click',function(){
+        pressButton({keyCode:40});
+    });
+
+    $('.left_arrow_btn').on('click',function(){
+        pressButton({keyCode:37});
+    });
+
+    function pressButton(e){
+        let timerKey;
+        keyDownFunc(e);
+        timerKey = setTimeout(function(){
+            keyUpFunc(e);
+        },200); 
+    }
+
+    function keyDownFunc(e){
         if (game_over === false) {
             var key = e.keyCode;
             if (key === 37 && move_left === false) {
@@ -176,9 +235,9 @@ $(function() {
                 move_down = requestAnimationFrame(down);
             }
         }
-    });
+    }
 
-    $(document).on('keyup', function(e) {
+    function keyUpFunc(e){
         if (game_over === false) {
             var key = e.keyCode;
             if (key === 37) {
@@ -195,6 +254,10 @@ $(function() {
                 move_down = false;
             }
         }
+    }
+
+    $(document).on('keyup', function(e) {
+        keyUpFunc(e);
     });
 
     function left() {
@@ -288,8 +351,8 @@ $(function() {
         cancelAnimationFrame(move_left);
         cancelAnimationFrame(move_up);
         cancelAnimationFrame(move_down);
-        //restart_div.slideDown();
-        //restart_btn.focus();
+        restart_div.slideDown();
+        restart_btn.focus();
         
         var options = {
             "userId": userId,
@@ -297,7 +360,6 @@ $(function() {
             "score": parseInt(score.text())
         };
         updateScores(options);
-
         setHighScore();
     }
 
@@ -326,10 +388,40 @@ $(function() {
         var b2 = y2 + h2;
         var r2 = x2 + w2;
 
+
         if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
+        var xxx_score = parseInt(score.text());
+        if(xxx_score<20){
+            restartTextObj.text("That so Poor of You!");
+            smileyImgObj.attr("src", "./svg/sad0.svg");
+        }
+        else if(xxx_score>=20 && xxx_score<30){
+            restartTextObj.text("That was Bad");
+            smileyImgObj.attr("src", "./svg/sad1.svg");
+        }
+        else if(xxx_score>=30 && xxx_score<60){
+            restartTextObj.text("Good , You can do Better");
+            smileyImgObj.attr("src", "./svg/smiling0.svg");
+        }
+        else if(xxx_score>=60 && xxx_score<90){
+            restartTextObj.text("Great! Marching towards the Peak");
+            smileyImgObj.attr("src", "./svg/smiling1.svg");
+        }
+        else if(xxx_score>=90 && xxx_score<120){
+            restartTextObj.text("Voilla!! ");
+            smileyImgObj.attr("src", "./svg/smiling2.svg");
+        }
+        else if(xxx_score>=120 && xxx_score<150){
+            restartTextObj.text("Superb !Awesome! ");
+            smileyImgObj.attr("src", "./svg/happy0.svg");
+        }
+        else if(xxx_score>=150){
+            restartTextObj.text("Fantabulous !Outstanding! ");
+            smileyImgObj.attr("src", "./svg/happy1.svg");
+        }
+
         return true;
     }
 
-
-
+    
 });
