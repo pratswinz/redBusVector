@@ -10,103 +10,117 @@
     <link href="monteserrat.css" rel="stylesheet" /> 
     <link href="sidenavbar.css" rel="stylesheet" />
     <link href="scratchcard.css" rel="stylesheet" />
+    
 </head>
-
 <body>
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" id="closeNav">&times;</a>
-        <a href="#">About</a>
-        <a href="#" id="board">Leadership Board</a>
-        <a href="#" id="offer">Your Offers</a>
-        <a href="#">Contact</a>
+    <div class="overlay_input_container">
+        <div class="inputBox">
+            <span>Please Enter your username</span>
+            <input type='text' placeholder="eg. SN123" id="userID" value=''/>
+            <span class='error hidden'>User doesn't exist</span>
+            <button class="submit" id="submit">Submit</button>
+        </div>
     </div>
-    <span id="openNav">&#9776;</span>
-    <div id="score_div">
-        Score: <span id="score">0</span><br>
-        High Score: <span id="high_score">0</span>
-    </div>
-    <div class="offer_container hide">
-        <span id="closeCard">&times;</span>
-        <div class="container" id="js-container">
-                <canvas class="canvas" id="js-canvas" width="300" height="300"></canvas>
-                <form class="form" style="visibility: hidden;">
-                    <div class="reward"></div>
-                    <h3>The secret code is:</h3>
-                    <h1><code>HlkafSYc</code></h1>
-                </form>  
+    <div class="hidden" id="main_container">
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" id="closeNav">&times;</a>
+            <a href="#">About</a>
+            <a href="#" id="board">Leadership Board</a>
+            <a href="#" id="offer">Your Offers</a>
+            <a href="#">Contact</a>
+        </div>
+        <span id="openNav">&#9776;</span>
+        <div id="score_div">
+            Score: <span id="score">0</span><br>
+            High Score: <span id="high_score">0</span>
+        </div>
+        <div class="offer_container hide">
+            <span id="closeCard">&times;</span>
+            <div class="container" id="js-container">
+                    <canvas class="canvas" id="js-canvas" width="300" height="300"></canvas>
+                    <form class="form" style="visibility: hidden;">
+                        <div class="reward"></div>
+                        <h3>The secret code is:</h3>
+                        <h1><code>HlkafSYc</code></h1>
+                    </form>  
+                </div>
+        </div>
+        <div id="container">
+            <div id="line_1" class="line"></div>
+            <div id="line_2" class="line"></div>
+            <div id="line_3" class="line"></div>
+            <div id="car" class="car">
+                <div class="redBusTxt">redBus</div>
+                <div class="f_glass"></div>
+                <div class="b_glass"></div>
+                <div class="f_light_l"></div>
+                <div class="f_light_r"></div>
+                <div class="f_tyre_l"></div>
+                <div class="f_tyre_r"></div>
+                <div class="b_tyre_l"></div>
+                <div class="b_tyre_r"></div>
             </div>
-    </div>
-    <div id="container">
-        <div id="line_1" class="line"></div>
-        <div id="line_2" class="line"></div>
-        <div id="line_3" class="line"></div>
-        <div id="car" class="car">
-            <div class="redBusTxt">redBus</div>
-            <div class="f_glass"></div>
-            <div class="b_glass"></div>
-            <div class="f_light_l"></div>
-            <div class="f_light_r"></div>
-            <div class="f_tyre_l"></div>
-            <div class="f_tyre_r"></div>
-            <div class="b_tyre_l"></div>
-            <div class="b_tyre_r"></div>
+            <div id="car_1" class="car">
+                <div class="f_glass"></div>
+                <div class="b_glass"></div>
+                <div class="f_light_l"></div>
+                <div class="f_light_r"></div>
+                <div class="f_tyre_l"></div>
+                <div class="f_tyre_r"></div>
+                <div class="b_tyre_l"></div>
+                <div class="b_tyre_r"></div>
+            </div>
+            <div id="car_2" class="car">
+                <div class="f_glass"></div>
+                <div class="b_glass"></div>
+                <div class="f_light_l"></div>
+                <div class="f_light_r"></div>
+                <div class="f_tyre_l"></div>
+                <div class="f_tyre_r"></div>
+                <div class="b_tyre_l"></div>
+                <div class="b_tyre_r"></div>
+            </div>
+            <div id="car_3" class="car">
+                <div class="f_glass"></div>
+                <div class="b_glass"></div>
+                <div class="f_light_l"></div>
+                <div class="f_light_r"></div>
+                <div class="f_tyre_l"></div>
+                <div class="f_tyre_r"></div>
+                <div class="b_tyre_l"></div>
+                <div class="b_tyre_r"></div>
+            </div>
+            <div id="car_4" class="car">
+                <div class="redBusTxtPolice">POLICE</div>
+                <div class="f_glass"></div>
+                <div class="b_glass"></div>
+                <div class="f_light_l"></div>
+                <div class="f_light_r"></div>
+                <div class="f_tyre_l"></div>
+                <div class="f_tyre_r"></div>
+                <div class="b_tyre_l"></div>
+                <div class="b_tyre_r"></div>
+            </div>
+            <div id="restart_div">
+                <button id="restart">
+                    Restart<br>
+                    <small class="small_text">(press Enter)</small>
+                </button>
+            </div>
+            <!-- <div id="help">
+                <p>Controls: Right, Left, Up & Down arrow keys.</p>
+            </div> -->
         </div>
-        <div id="car_1" class="car">
-            <div class="f_glass"></div>
-            <div class="b_glass"></div>
-            <div class="f_light_l"></div>
-            <div class="f_light_r"></div>
-            <div class="f_tyre_l"></div>
-            <div class="f_tyre_r"></div>
-            <div class="b_tyre_l"></div>
-            <div class="b_tyre_r"></div>
+        <div class="game_controls_button">
+            <div class="arrow top_arrow_btn"></div>
+            <div class="arrow left_arrow_btn"></div>
+            <div class="arrow right_arrow_btn"></div>
+            <div class="arrow bottom_arrow_btn"></div>
         </div>
-        <div id="car_2" class="car">
-            <div class="f_glass"></div>
-            <div class="b_glass"></div>
-            <div class="f_light_l"></div>
-            <div class="f_light_r"></div>
-            <div class="f_tyre_l"></div>
-            <div class="f_tyre_r"></div>
-            <div class="b_tyre_l"></div>
-            <div class="b_tyre_r"></div>
+        <div class="leadership">
+            <div class="username"></div>
+            <div class="rank"></div>
         </div>
-        <div id="car_3" class="car">
-            <div class="f_glass"></div>
-            <div class="b_glass"></div>
-            <div class="f_light_l"></div>
-            <div class="f_light_r"></div>
-            <div class="f_tyre_l"></div>
-            <div class="f_tyre_r"></div>
-            <div class="b_tyre_l"></div>
-            <div class="b_tyre_r"></div>
-        </div>
-        <div id="car_4" class="car">
-            <div class="redBusTxtPolice">POLICE</div>
-            <div class="f_glass"></div>
-            <div class="b_glass"></div>
-            <div class="f_light_l"></div>
-            <div class="f_light_r"></div>
-            <div class="f_tyre_l"></div>
-            <div class="f_tyre_r"></div>
-            <div class="b_tyre_l"></div>
-            <div class="b_tyre_r"></div>
-        </div>
-        <div id="restart_div">
-            <button id="restart">
-                Restart<br>
-                <small class="small_text">(press Enter)</small>
-            </button>
-        </div>
-        <!-- <div id="help">
-            <p>Controls: Right, Left, Up & Down arrow keys.</p>
-        </div> -->
-    </div>
-    <div class="game_controls_button">
-        <div class="arrow top_arrow_btn"></div>
-        <div class="arrow left_arrow_btn"></div>
-        <div class="arrow right_arrow_btn"></div>
-        <div class="arrow bottom_arrow_btn"></div>
     </div>
     <script src="jquery.min.js"></script>
     <script src="api.js"></script>

@@ -52,15 +52,15 @@ var updateScores = function (options, callback) {
 $(function() {
 
     // Set the session ID for Game
-    var userId = "123456";
-    var sessionID = "";
-    activateSession(userId, function (err, sID) {
-        if (!err && sID) {
-            sessionID = sID;
-        } else {
-            sessionID = "";
-        }
-    });
+    // var userId = "123456";
+    // var sessionID = "";
+    // activateSession(userId, function (err, sID) {
+    //     if (!err && sID) {
+    //         sessionID = sID;
+    //     } else {
+    //         sessionID = "";
+    //     }
+    // });
 
     var anim_id;
 
@@ -100,6 +100,24 @@ $(function() {
     var move_left = false;
     var move_up = false;
     var move_down = false;
+    /**
+     * on username submit
+     */
+    $('#submit').on('click', function(){
+        let getUserID = document.getElementById('userID').value;
+        activateSession(getUserID, function(error, data){
+            if(error){
+                $('.error')[0].classList.remove('hidden');
+            }else if(data){
+                $('.overlay_input_container')[0].classList.add('hidden');
+                $('#main_container')[0].classList.remove('hidden');
+            }
+        })
+    });
+    /**
+     * ===========end here=============
+     */
+
     /**
      * On click of Hamburger Icon
      */
