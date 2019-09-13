@@ -393,37 +393,52 @@ $(function() {
         var w2 = $div2.outerWidth(true);
         var b2 = y2 + h2;
         var r2 = x2 + w2;
+        let counter = 0;
+        let faceStr = "smiling";
+        setInterval(function(){
+            if(counter==3) counter=0;
+            
+            smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
+            counter++;
+        },2000);
 
 
         if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
         var xxx_score = parseInt(score.text());
         if(xxx_score<20){
             restartTextObj.text("That so Poor of You!");
-            smileyImgObj.attr("src", "./svg/sad0.svg");
+            faceStr = "sad";
+            smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
         }
         else if(xxx_score>=20 && xxx_score<30){
             restartTextObj.text("That was Bad");
-            smileyImgObj.attr("src", "./svg/sad1.svg");
+            faceStr = "sad";
+            smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
         }
         else if(xxx_score>=30 && xxx_score<60){
             restartTextObj.text("Good , You can do Better");
-            smileyImgObj.attr("src", "./svg/smiling0.svg");
+            faceStr = "smiling";
+            smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
         }
         else if(xxx_score>=60 && xxx_score<90){
             restartTextObj.text("Great! Marching towards the Peak");
-            smileyImgObj.attr("src", "./svg/smiling1.svg");
+            faceStr = "smiling";
+            smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
         }
         else if(xxx_score>=90 && xxx_score<120){
-            restartTextObj.text("Voilla!! ");
-            smileyImgObj.attr("src", "./svg/smiling2.svg");
+            restartTextObj.text("Voilla!!Race for more ");
+            faceStr = "happy";
+            smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
         }
         else if(xxx_score>=120 && xxx_score<150){
             restartTextObj.text("Superb !Awesome! ");
-            smileyImgObj.attr("src", "./svg/happy0.svg");
+            faceStr = "happy";
+            smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
         }
         else if(xxx_score>=150){
             restartTextObj.text("Fantabulous !Outstanding! ");
-            smileyImgObj.attr("src", "./svg/happy1.svg");
+            faceStr = "happy";
+            smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
         }
 
         return true;
