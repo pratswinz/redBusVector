@@ -49,6 +49,32 @@ var updateScores = function (options, callback) {
     });
 };
 
+var getScores = function (callback) {
+    var url = "/api/leaderboard";
+    $.ajax({
+        "url": url,
+        "type": "GET",
+        "success": function (data) {
+            if (typeof data === "string") {
+                if (typeof callback === "function") {
+                    callback(null, data);
+                }
+                return;
+            }
+
+            if (typeof callback === "function") {
+                callback("Error fetching Score", null);
+            }
+        },
+        "error":  function (err) {
+            console.log("Error", err);
+            if (typeof callback === "function") {
+                callback("Error fetching Score", null);
+            }
+        }
+    });
+};
+
 $(function() {
 
     // Set the session ID for Game
@@ -111,14 +137,23 @@ $(function() {
         document.getElementById("mySidenav").style.width = "0";        
     });
 
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-    }
-    
-    /* Set the width of the side navigation to 0 */
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-    }
+    $('#offer').on('click',function(){
+        $('.offer_container')[0].classList.remove('hide');
+        // location.href = '/offer.html';
+        $('#closeNav').click();
+        // document.getElementsByClassName('offer_container')[0].classList.remove('hide');
+        // $.ajax( "/api/board" )
+        //     .done(function(res) {
+        //         console.log(res);
+        //     })
+        //     .fail(function() {
+        //         console.log('error')
+        //     })
+    });
+
+    $("#closeCard").on('click', function(){
+        $('.offer_container')[0].classList.add('hide');
+    });
 
     /**
      * ================end here================
