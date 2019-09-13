@@ -26,8 +26,17 @@ module.exports = (req, res, next) => {
         dbo.collection("scores").find().sort(sortQuery).limit(3).toArray((err, result) => {
             if(err) throw err;
             // connector.close();
-            response.toppers = result;
-            response.rank = rank === 0 ? 1 : rank;
+            if(result.length === 0){
+                response.toppers.push({
+                    userId: req.query.userId,
+                    sessionActive: false,
+                    sessionList: [],
+                    totalScore: 0
+                })
+            }else{
+                response.toppers = result;
+                response.rank = rank === 0 ? 1 : rank;
+            }
             res.send(response);
         });
     })
