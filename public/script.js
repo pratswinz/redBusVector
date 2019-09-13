@@ -1,12 +1,14 @@
 /* Prateek Srivastava */
 
-var activateSession = function (callback) {
+var activateSession = function (userId, callback) {
     $.ajax({
         "url": "/api/activeSession?userId=" + userId,
         "type": "GET",
         "success": function (data) {
             if (typeof data === "string") {
-                callback(null, data);
+                if (typeof callback === "function") {
+                    callback(null, data);
+                }
                 return;
             }
 
@@ -14,10 +16,38 @@ var activateSession = function (callback) {
         },
         "error":  function (err) {
             console.log("Error", err);
-            callback("Error setting SessionId", null);
+            if (typeof callback === "function") {
+                callback("Error setting SessionId", null);
+            }
         }
     });
-}
+};
+
+var updateScores = function (options, callback) {
+    var url = "/api/updateScores?userId=" + options.userId + "&sessionId=" + options.sessionId + "&score=" + options.score;
+    $.ajax({
+        "url": url,
+        "type": "GET",
+        "success": function (data) {
+            if (typeof data === "string") {
+                if (typeof callback === "function") {
+                    callback(null, data);
+                }
+                return;
+            }
+
+            if (typeof callback === "function") {
+                callback("Error updating Score", null);
+            }
+        },
+        "error":  function (err) {
+            console.log("Error", err);
+            if (typeof callback === "function") {
+                callback("Error updating Score", null);
+            }
+        }
+    });
+};
 
 $(function() {
 
@@ -27,6 +57,8 @@ $(function() {
     activateSession(userId, function (err, sID) {
         if (!err && sID) {
             sessionID = sID;
+        } else {
+            sessionID = "";
         }
     });
 
@@ -223,6 +255,14 @@ $(function() {
         cancelAnimationFrame(move_down);
         //restart_div.slideDown();
         //restart_btn.focus();
+        
+        var options = {
+            "userId": userId,
+            "sessionId": sessionID,
+            "score": parseInt(score.text())
+        };
+        updateScores(options);
+
         setHighScore();
     }
 
