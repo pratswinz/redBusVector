@@ -6,7 +6,7 @@ const leaderboard = require('./apiController/leaderboard');
 const activeSession = require('./apiController/activeSession');
 const gameOver = require('./apiController/gameOver');
 
-router.post("/updatescores", updateScores);
+router.get("/updatescores", updateScores);
 router.get("/leaderboard", leaderboard);
 router.get("/activeSession", activeSession);
 router.get("/gameover", gameOver);
