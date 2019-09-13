@@ -109,6 +109,9 @@ $(function() {
     var restart_div = $('#restart_div');
     var restart_btn = $('#restart');
     var score = $('#score');
+    var smileyImgObj = $('#smileyImg');
+    var restartTextObj = $('#restart_text');
+
     var audio = new Audio('./audio/carAccelaratingAudio.mp3');
     var high_score = localStorage.getItem('high_score');
     $('#high_score').text(high_score);
@@ -357,7 +360,6 @@ $(function() {
             "score": parseInt(score.text())
         };
         updateScores(options);
-
         setHighScore();
     }
 
@@ -386,7 +388,38 @@ $(function() {
         var b2 = y2 + h2;
         var r2 = x2 + w2;
 
+
         if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
+        var xxx_score = parseInt(score.text());
+        if(xxx_score<20){
+            restartTextObj.text("That so Poor of You!");
+            smileyImgObj.attr("src", "./svg/sad0.svg");
+        }
+        else if(xxx_score>=20 && xxx_score<30){
+            restartTextObj.text("That was Bad");
+            smileyImgObj.attr("src", "./svg/sad1.svg");
+        }
+        else if(xxx_score>=30 && xxx_score<60){
+            restartTextObj.text("Good , You can do Better");
+            smileyImgObj.attr("src", "./svg/smiling0.svg");
+        }
+        else if(xxx_score>=60 && xxx_score<90){
+            restartTextObj.text("Great! Marching towards the Peak");
+            smileyImgObj.attr("src", "./svg/smiling1.svg");
+        }
+        else if(xxx_score>=90 && xxx_score<120){
+            restartTextObj.text("Voilla!! ");
+            smileyImgObj.attr("src", "./svg/smiling2.svg");
+        }
+        else if(xxx_score>=120 && xxx_score<150){
+            restartTextObj.text("Superb !Awesome! ");
+            smileyImgObj.attr("src", "./svg/happy0.svg");
+        }
+        else if(xxx_score>=150){
+            restartTextObj.text("Fantabulous !Outstanding! ");
+            smileyImgObj.attr("src", "./svg/happy1.svg");
+        }
+
         return true;
     }
 
