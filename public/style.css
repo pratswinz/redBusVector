@@ -6,16 +6,40 @@ body {
     font-family: sans-serif;
 }
 
-#container{
-    position: relative;
-    height: 70vh;
-    width: 25%;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 20px;
-    background: linear-gradient(rgb(100, 98, 98), rgb(190, 194, 190));
-    overflow: hidden;
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    #container{
+        position: relative;
+        height: 90vh;
+        width: 90%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 20px;
+        background: linear-gradient(rgb(100, 98, 98), rgb(190, 194, 190));
+        overflow: hidden;
+    }
 }
+
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (min-resolution: 192dpi) { 
+    #container{
+        position: relative;
+        height: 70vh;
+        width: 25%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 20px;
+        background: linear-gradient(rgb(100, 98, 98), rgb(190, 194, 190));
+        overflow: hidden;
+    }
+}
+
 .line{
     position: absolute;
     height: 150px;
@@ -172,7 +196,7 @@ body {
 }
 #car_3{
     top: -350px;
-    left: 50%;
+    left: 20%;
     background-color: #f4f74b;
 }
 
@@ -206,7 +230,7 @@ body {
     background-color: #292929;
     color: white;
     font-family: sans-serif;
-    font-size: 40px;
+    font-size: 20px;
     text-align: center;
     display: none;
 }
@@ -247,8 +271,8 @@ body {
 .redBusTxtPolice{
     position: relative;
     animation: blinkingText .5s infinite;
-    font-size: .7em;
-    top: 38%;
+    font-size: .6em;
+    top: 40%;
     text-align: center;
 }
 @keyframes blinkingText{
