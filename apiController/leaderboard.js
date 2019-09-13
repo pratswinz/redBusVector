@@ -24,7 +24,7 @@ module.exports = (req, res, next) => {
 
         dbo.collection("scores").find().sort(sortQuery).limit(3).toArray((err, result) => {
             if(err) throw err;
-            connector.close();
+            // connector.close();
             response.toppers = result;
             response.rank = rank;
             res.send(response);
