@@ -6,16 +6,40 @@ body {
     font-family: sans-serif;
 }
 
-#container{
-    position: relative;
-    height: 70vh;
-    width: 25%;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 20px;
-    background: linear-gradient(rgb(100, 98, 98), rgb(190, 194, 190));
-    overflow: hidden;
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    #container{
+        position: relative;
+        height: 90vh;
+        width: 90%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 20px;
+        background: linear-gradient(rgb(100, 98, 98), rgb(190, 194, 190));
+        overflow: hidden;
+    }
 }
+
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (min-resolution: 192dpi) { 
+    #container{
+        position: relative;
+        height: 70vh;
+        width: 25%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 20px;
+        background: linear-gradient(rgb(100, 98, 98), rgb(190, 194, 190));
+        overflow: hidden;
+    }
+}
+
 .line{
     position: absolute;
     height: 150px;

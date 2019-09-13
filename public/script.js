@@ -38,8 +38,32 @@ $(function() {
     var move_left = false;
     var move_up = false;
     var move_down = false;
+    /**
+     * On click of Hamburger Icon
+     */
+    $('#openNav').on('click',function(){
+        document.getElementById("mySidenav").style.width = "250px";
+    });
+
+    $('#closeNav').on('click', function(){
+        document.getElementById("mySidenav").style.width = "0";        
+    });
+
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+    
+    /* Set the width of the side navigation to 0 */
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+
+    /**
+     * ================end here================
+     */
 
     /* ------------------------------GAME CODE STARTS HERE------------------------------------------- */
+
 
     /* Move the cars */
     $(document).on('keydown', function(e) {

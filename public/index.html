@@ -5,12 +5,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Traffic racer</title>
-    <link href="style.css" rel="stylesheet" /> </head>
+    <link href="style.css" rel="stylesheet" /> 
+    <link href="sidenavbar.css" rel="stylesheet" />
+</head>
 
 <body>
     <div id="help">
         <p>Controls: Right, Left, Up & Down arrow keys.</p>
     </div>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" id="closeNav">&times;</a>
+        <a href="#">About</a>
+        <a href="#">Leadership Board</a>
+        <a href="#">Your Offers</a>
+        <a href="#">Contact</a>
+    </div>
+    <span style="font-size:30px;cursor:pointer" id="openNav">&#9776;</span>
     <div id="score_div">
         Score: <span id="score">0</span><br>
         High Score: <span id="high_score">0</span>
@@ -77,8 +87,6 @@
             </button>
         </div>
     </div>
-    
-
     <script src="jquery.min.js"></script>
     <script src="script.js"></script>
 </body>
