@@ -8,11 +8,12 @@ body {
 
 #container{
     position: relative;
-    height: 90vh;
+    height: 70vh;
     width: 25%;
-    left: 35%;
-    margin-top: 20px;;
-    background-color: #292929;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+    background: linear-gradient(rgb(100, 98, 98), rgb(190, 194, 190));
     overflow: hidden;
 }
 .line{
@@ -20,7 +21,7 @@ body {
     height: 150px;
     width: 4%;
     margin-left: 48%;
-    background-color: rgba(255,255,255,0.5);
+    background-color: #FFF;
 }
 #line_1{
     top: -150px;
@@ -48,7 +49,37 @@ body {
 #car .f_light_l,#car .f_light_r{
     height: 3%;
     top: -3%;
+    animation: blinking 1s infinite;
 }
+
+#car_1 .f_light_l,#car_1 .f_light_r{
+    animation: blinkingCarLight 1s infinite;
+}
+
+@keyframes blinking {
+    0%{
+      background-color: #f38a77;
+    }
+    50%{
+      background-color: #FFF;
+    }
+    100%{
+      background-color: #faf621;
+    }
+  }
+
+  @keyframes blinkingCarLight {
+    0%{
+      background-color: rgb(245, 79, 79);
+    }
+    50%{
+      background-color: rgb(10, 10, 10);
+    }
+    100%{
+      background-color: #d8fd31;
+    }
+  }
+
 .redBusTxt {
     color: #FFF;
     position: absolute;
@@ -132,18 +163,38 @@ body {
 #car_1{
     top: -100px;
     left: 60%;
-    background-color: #26c5ff;
+    background-color: #52c8f3;
 }
 #car_2{
     top: -200px;
     left: 40%;
-    background-color: #26c5ff;
+    background-color: #236d01;
 }
 #car_3{
     top: -350px;
     left: 50%;
-    background-color: #26c5ff;
+    background-color: #f4f74b;
 }
+
+#car_4{
+    top: -350px;
+    left: 50%;
+    animation: blinkingCar 1s infinite;
+    background-color: #7351ee;
+}
+
+@keyframes blinkingCar {
+    0%{
+      background-color: #f38a77;
+    }
+    50%{
+      background-color: #FFF;
+    }
+    100%{
+      background-color: #faf621;
+    }
+  }
+
 #restart_div {
     position: absolute;
     height: 100%;
@@ -167,16 +218,24 @@ body {
 .small_text{
     font-size: 15px;
 }
-#score_div{
-    position: absolute;
-    margin-top: 20%;
-    margin-left: 1%;
+
+
+#score_div {
+    margin-top: 1%;
+    margin: 0 auto;
+    text-align: center;
     font-size: 35px;
+    width: 25%;
     background-color: white;
     color: #454545;
     padding: 10px;
     box-shadow: 4px 4px 0px 1px #808080;
 }
+
+
 #help{
-	text-align: center;
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
 }
