@@ -9,20 +9,32 @@
     <link href="style.css" rel="stylesheet" /> 
     <link href="monteserrat.css" rel="stylesheet" /> 
     <link href="sidenavbar.css" rel="stylesheet" />
+    <link href="scratchcard.css" rel="stylesheet" />
 </head>
 
 <body>
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" id="closeNav">&times;</a>
         <a href="#">About</a>
-        <a href="#">Leadership Board</a>
-        <a href="#">Your Offers</a>
+        <a href="#" id="board">Leadership Board</a>
+        <a href="#" id="offer">Your Offers</a>
         <a href="#">Contact</a>
     </div>
     <span id="openNav">&#9776;</span>
     <div id="score_div">
         Score: <span id="score">0</span><br>
         High Score: <span id="high_score">0</span>
+    </div>
+    <div class="offer_container hide">
+        <span id="closeCard">&times;</span>
+        <div class="container" id="js-container">
+                <canvas class="canvas" id="js-canvas" width="300" height="300"></canvas>
+                <form class="form" style="visibility: hidden;">
+                    <div class="reward"></div>
+                    <h3>The secret code is:</h3>
+                    <h1><code>HlkafSYc</code></h1>
+                </form>  
+            </div>
     </div>
     <div id="container">
         <div id="line_1" class="line"></div>
@@ -97,7 +109,9 @@
         <div class="arrow bottom_arrow_btn"></div>
     </div>
     <script src="jquery.min.js"></script>
+    <script src="api.js"></script>
     <script src="script.js"></script>
+    <script src="card.js"></script>
 </body>
 
 </html>

@@ -1,5 +1,66 @@
 /* Prateek Srivastava */
+
+var activateSession = function (userId, callback) {
+    $.ajax({
+        "url": "/api/activeSession?userId=" + userId,
+        "type": "GET",
+        "success": function (data) {
+            if (typeof data === "string") {
+                if (typeof callback === "function") {
+                    callback(null, data);
+                }
+                return;
+            }
+
+            callback("Error setting SessionId", null);
+        },
+        "error":  function (err) {
+            console.log("Error", err);
+            if (typeof callback === "function") {
+                callback("Error setting SessionId", null);
+            }
+        }
+    });
+};
+
+var updateScores = function (options, callback) {
+    var url = "/api/updateScores?userId=" + options.userId + "&sessionId=" + options.sessionId + "&score=" + options.score;
+    $.ajax({
+        "url": url,
+        "type": "GET",
+        "success": function (data) {
+            if (typeof data === "string") {
+                if (typeof callback === "function") {
+                    callback(null, data);
+                }
+                return;
+            }
+
+            if (typeof callback === "function") {
+                callback("Error updating Score", null);
+            }
+        },
+        "error":  function (err) {
+            console.log("Error", err);
+            if (typeof callback === "function") {
+                callback("Error updating Score", null);
+            }
+        }
+    });
+};
+
 $(function() {
+
+    // Set the session ID for Game
+    var userId = "123456";
+    var sessionID = "";
+    activateSession(userId, function (err, sID) {
+        if (!err && sID) {
+            sessionID = sID;
+        } else {
+            sessionID = "";
+        }
+    });
 
     var anim_id;
 
@@ -50,14 +111,23 @@ $(function() {
         document.getElementById("mySidenav").style.width = "0";        
     });
 
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-    }
-    
-    /* Set the width of the side navigation to 0 */
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-    }
+    $('#offer').on('click',function(){
+        $('.offer_container')[0].classList.remove('hide');
+        // location.href = '/offer.html';
+        $('#closeNav').click();
+        // document.getElementsByClassName('offer_container')[0].classList.remove('hide');
+        // $.ajax( "/api/board" )
+        //     .done(function(res) {
+        //         console.log(res);
+        //     })
+        //     .fail(function() {
+        //         console.log('error')
+        //     })
+    });
+
+    $("#closeCard").on('click', function(){
+        $('.offer_container')[0].classList.add('hide');
+    });
 
     /* Move the cars */
     $(document).on('keydown', function(e) {
@@ -166,7 +236,7 @@ $(function() {
 
         score_counter++;
         
-        //audio.play();
+        audio.play();
 
         if (score_counter % 20 == 0) {
             score.text(parseInt(score.text()) + 1);
@@ -219,6 +289,14 @@ $(function() {
         cancelAnimationFrame(move_down);
         //restart_div.slideDown();
         //restart_btn.focus();
+        
+        var options = {
+            "userId": userId,
+            "sessionId": sessionID,
+            "score": parseInt(score.text())
+        };
+        updateScores(options);
+
         setHighScore();
     }
 

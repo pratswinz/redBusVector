@@ -6,7 +6,9 @@ body {
     background-image: url(./images/asfalt-dark.png);
 }
 
-
+.hide{
+    left:-500px;
+}
 
 #openNav{
     font-size: 2em;
@@ -14,6 +16,7 @@ body {
     position: absolute;
     top: 0;
     left: 10px;
+    z-index:2;
 }
 
 /* Portrait and Landscape */
