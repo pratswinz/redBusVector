@@ -1,5 +1,34 @@
 /* Prateek Srivastava */
+
+var activateSession = function (callback) {
+    $.ajax({
+        "url": "/api/activeSession?userId=" + userId,
+        "type": "GET",
+        "success": function (data) {
+            if (typeof data === "string") {
+                callback(null, data);
+                return;
+            }
+
+            callback("Error setting SessionId", null);
+        },
+        "error":  function (err) {
+            console.log("Error", err);
+            callback("Error setting SessionId", null);
+        }
+    });
+}
+
 $(function() {
+
+    // Set the session ID for Game
+    var userId = "123456";
+    var sessionID = "";
+    activateSession(userId, function (err, sID) {
+        if (!err && sID) {
+            sessionID = sID;
+        }
+    });
 
     var anim_id;
 
