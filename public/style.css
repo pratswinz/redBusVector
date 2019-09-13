@@ -177,21 +177,34 @@ body {
 }
 
 #car_4{
-    top: -350px;
-    left: 50%;
+    top: -400px;
+    left: 80%;
     animation: blinkingCar 1s infinite;
-    background-color: #7351ee;
+    background-color: #0f0f0f;
 }
+
+#car_4 .f_light_l,#car_4 .f_light_r{
+    animation: blinkingCarLight4 .5s infinite;
+}
+
+@keyframes blinkingCarLight4 {
+    0%{
+      background-color: #fbff1e;
+    }
+    100%{
+      background-color: #fffefe;
+    }
+  }
 
 @keyframes blinkingCar {
     0%{
-      background-color: #f38a77;
+      background-color: #686160;
     }
     50%{
-      background-color: #FFF;
+      background-color: rgb(161, 150, 150);
     }
     100%{
-      background-color: #faf621;
+      background-color: #fa1909;
     }
   }
 
@@ -238,4 +251,17 @@ body {
     width: 100%;
     position: absolute;
     bottom: 0;
+}
+
+.redBusTxtPolice{
+    position: relative;
+    animation: blinkingText .5s infinite;
+    font-weight: 800;
+    font-size: 1.5em;
+    top: 17%;
+    text-align: center;
+}
+@keyframes blinkingText{
+    0%{     color: #FFF;    }
+    100%{   color: rgb(48, 26, 250);    }
 }

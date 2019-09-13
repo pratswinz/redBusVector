@@ -9,6 +9,7 @@ $(function() {
     var car_1 = $('#car_1');
     var car_2 = $('#car_2');
     var car_3 = $('#car_3');
+    var car_4 = $('#car_4');
     var line_1 = $('#line_1');
     var line_2 = $('#line_2');
     var line_3 = $('#line_3');
@@ -108,7 +109,7 @@ $(function() {
     anim_id = requestAnimationFrame(repeat);
 
     function repeat() {
-        if (collision(car, car_1) || collision(car, car_2) || collision(car, car_3)) {
+        if (collision(car, car_1) || collision(car, car_2) || collision(car, car_3) || collision(car,car_4)) {
             stop_the_game();
             audio.pause();
             return;
@@ -129,6 +130,7 @@ $(function() {
         car_down(car_1);
         car_down(car_2);
         car_down(car_3);
+        car_down(car_4);
 
         line_down(line_1);
         line_down(line_2);
