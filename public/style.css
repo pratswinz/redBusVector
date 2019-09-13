@@ -300,12 +300,13 @@ body {
     width: 90%;
     height: 7vh;
     margin: 0 auto;
-    display: flex;
-    position: relative;
+    display: flex;    
+    position: fixed;
     text-align: center;
     justify-content: space-around;
     min-width: 100px;
     align-items: center;
+    
 }
 
 .arrow{
