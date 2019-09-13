@@ -38,7 +38,7 @@ module.exports = (req, res, next) => {
                             score: 0
                         }
                     ],
-                    totalScores: 0
+                    totalScore: 0
                 };
                 const dbo = connector.db("vector-db");
                 dbo.collection("scores").insertOne(sessionObj,(err, resultRec) => {
