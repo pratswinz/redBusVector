@@ -49,6 +49,32 @@ var updateScores = function (options, callback) {
     });
 };
 
+var getScores = function (callback) {
+    var url = "/api/leaderboard";
+    $.ajax({
+        "url": url,
+        "type": "GET",
+        "success": function (data) {
+            if (typeof data === "string") {
+                if (typeof callback === "function") {
+                    callback(null, data);
+                }
+                return;
+            }
+
+            if (typeof callback === "function") {
+                callback("Error fetching Score", null);
+            }
+        },
+        "error":  function (err) {
+            console.log("Error", err);
+            if (typeof callback === "function") {
+                callback("Error fetching Score", null);
+            }
+        }
+    });
+};
+
 $(function() {
 
     // Set the session ID for Game
