@@ -16,7 +16,7 @@ module.exports = (req, res, next) => {
                     }
                 })
                 dbo.collection("scores").save(doc);
-                connector.close();
+                // connector.close();
                 res.send("Updated records");
             })
         }).catch(err => {
