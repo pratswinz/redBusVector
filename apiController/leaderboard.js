@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
         const dbo = connector.db("vector-db");
         const sortQuery = { totalScore: -1 };
         let response = {
-            "rank": -1,
+            "rank": 1,
             "toppers": []
         };
 
@@ -19,6 +19,7 @@ module.exports = (req, res, next) => {
                     rank = i+1;
                     break;
                 }
+                rank = i+1
             }
         } )
 
@@ -26,7 +27,7 @@ module.exports = (req, res, next) => {
             if(err) throw err;
             // connector.close();
             response.toppers = result;
-            response.rank = rank;
+            response.rank = rank === 0 ? 1 : rank;
             res.send(response);
         });
     })
