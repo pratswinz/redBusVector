@@ -115,9 +115,9 @@ body {
 .redBusTxt {
     color: #FFF;
     position: absolute;
-    font-size: .7em;
+    font-size: .5em;
     background: none;
-    left: 5%;
+    left: 13%;
     top: 45%;
 }
 .f_glass{
