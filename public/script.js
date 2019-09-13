@@ -25,6 +25,12 @@ var activateSession = function (userId, callback) {
 
 var updateScores = function (options, callback) {
     var url = "/api/updateScores?userId=" + options.userId + "&sessionId=" + options.sessionId + "&score=" + options.score;
+    if (!options.userId || !options.sessionId || !options.score) {
+        if (typeof callback === "function") {
+            callback("Error updating Score", null);
+        }
+        return;
+    }
     $.ajax({
         "url": url,
         "type": "GET",
@@ -78,8 +84,8 @@ var getScores = function (callback) {
 $(function() {
 
     // Set the session ID for Game
-    // var userId = "123456";
-    // var sessionID = "";
+    var userId = "";
+    var sessionID = "";
     // activateSession(userId, function (err, sID) {
     //     if (!err && sID) {
     //         sessionID = sID;
@@ -129,12 +135,23 @@ $(function() {
     /**
      * on username submit
      */
+    if (localStorage.getItem("__@RB_name")) {
+        $('.overlay_input_container')[0].classList.add('hidden');
+        $('#main_container')[0].classList.remove('hidden');
+
+        userId = localStorage.getItem("__@RB_name");
+        sessionID = localStorage.getItem("__@RB_ssId");
+    }
+
     $('#submit').on('click', function(){
-        let getUserID = document.getElementById('userID').value;
-        activateSession(getUserID, function(error, data){
-            if(error){
+        userId = document.getElementById('userID').value;
+        activateSession(userId, function(error, data){
+            if (error) {
                 $('.error')[0].classList.remove('hidden');
-            }else if(data){
+            } else if (data) {
+                localStorage.setItem("__@RB_name", userId);
+                localStorage.setItem("__@RB_ssId", data);
+                sessionID = data;
                 $('.overlay_input_container')[0].classList.add('hidden');
                 $('#main_container')[0].classList.remove('hidden');
             }
