@@ -1,5 +1,67 @@
 /* Prateek Srivastava */
+
+var activateSession = function (userId, callback) {
+    $.ajax({
+        "url": "/api/activeSession?userId=" + userId,
+        "type": "GET",
+        "success": function (data) {
+            if (typeof data === "string") {
+                if (typeof callback === "function") {
+                    callback(null, data);
+                }
+                return;
+            }
+
+            callback("Error setting SessionId", null);
+        },
+        "error":  function (err) {
+            console.log("Error", err);
+            if (typeof callback === "function") {
+                callback("Error setting SessionId", null);
+            }
+        }
+    });
+};
+
+var updateScores = function (options, callback) {
+    var url = "/api/updateScores?userId=" + options.userId + "&sessionId=" + options.sessionId + "&score=" + options.score;
+    $.ajax({
+        "url": url,
+        "type": "GET",
+        "success": function (data) {
+            if (typeof data === "string") {
+                if (typeof callback === "function") {
+                    callback(null, data);
+                }
+                return;
+            }
+
+            if (typeof callback === "function") {
+                callback("Error updating Score", null);
+            }
+        },
+        "error":  function (err) {
+            console.log("Error", err);
+            if (typeof callback === "function") {
+                callback("Error updating Score", null);
+            }
+        }
+    });
+};
+
 $(function() {
+
+    // Set the session ID for Game
+    var userId = "123456";
+    var sessionID = "";
+    activateSession(userId, function (err, sID) {
+        if (!err && sID) {
+            sessionID = sID;
+        } else {
+            sessionID = "";
+        }
+    });
+
     var anim_id;
 
     //saving dom objects to variables
@@ -202,6 +264,14 @@ $(function() {
         cancelAnimationFrame(move_down);
         //restart_div.slideDown();
         //restart_btn.focus();
+        
+        var options = {
+            "userId": userId,
+            "sessionId": sessionID,
+            "score": parseInt(score.text())
+        };
+        updateScores(options);
+
         setHighScore();
     }
 
