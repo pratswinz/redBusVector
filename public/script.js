@@ -112,7 +112,7 @@ $(function() {
     var smileyImgObj = $('#smileyImg');
     var restartTextObj = $('#restart_text');
 
-    var audio = new Audio('./audio/carAccelaratingAudio.mp3');
+    var audio = new Audio('./audio/engine.mp3');
     var high_score = localStorage.getItem('high_score');
     $('#high_score').text(high_score);
 
@@ -305,8 +305,14 @@ $(function() {
         if (score_counter % 20 == 0) {
             score.text(parseInt(score.text()) + 1);
         }
-        if (score_counter % 500 == 0) {
+        
+        if (score_counter % 300 == 0) {
             speed++;
+            if(speed>5){
+                audio.src = './audio/carAccelaratingAudio.mp3';
+            }else if(speed>=2 && speed<=3){
+                audio.src = './audio/bus.mp3';
+            }
             line_speed++;
         }
 
