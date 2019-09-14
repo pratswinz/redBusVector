@@ -107,12 +107,18 @@ body {
         margin: 0 8px;
         background: #ffffff;
         margin: 8px 0px;
+        padding: 8px;
     }
 
     .boardScore{
         background:#EFE7D6;
         padding-bottom: 8px;
         margin:8px;
+    }
+
+    .current_user{
+        background: #F70041 !important;
+        color: #fff;
     }
 
     .boardScore >div:first-child{

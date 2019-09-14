@@ -177,7 +177,7 @@ $(function() {
             if(!error && data){
                 let board = `<div class="row header"><span></span><span>LEADERBOARD</span></div>`;
                 for(let i = 0; i < data.toppers.length; i++){
-                    board += `<div class="row">
+                    board += `<div class="row ${data.toppers[i].userId === userId ? 'current_user' : ''}">
                                 <span class="profile"></span>
                                 <span class="userId">${data.toppers[i].userId}</span>
                                 <span class="score">${data.toppers[i].totalScore}</span>
