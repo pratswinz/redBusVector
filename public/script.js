@@ -339,7 +339,7 @@ $(function() {
             score.text(parseInt(score.text()) + 1);
         }
         
-        if (score_counter % 300 == 0) {
+        if (score_counter % 500 == 0) {
             speed++;
             if(speed>5){
                 audio.src = './audio/carAccelaratingAudio.mp3';
@@ -400,43 +400,14 @@ $(function() {
         };
         updateScores(options);
         setHighScore();
-    }
-
-    function setHighScore() {
-        if (high_score < parseInt(score.text())) {
-            high_score = parseInt(score.text());
-            localStorage.setItem('high_score', parseInt(score.text()));
-        }
-        $('#high_score').text(high_score);
-    }
-
-    /* ------------------------------GAME CODE ENDS HERE------------------------------------------- */
-
-
-    function collision($div1, $div2) {
-        var x1 = $div1.offset().left;
-        var y1 = $div1.offset().top;
-        var h1 = $div1.outerHeight(true);
-        var w1 = $div1.outerWidth(true);
-        var b1 = y1 + h1;
-        var r1 = x1 + w1;
-        var x2 = $div2.offset().left;
-        var y2 = $div2.offset().top;
-        var h2 = $div2.outerHeight(true);
-        var w2 = $div2.outerWidth(true);
-        var b2 = y2 + h2;
-        var r2 = x2 + w2;
-        let counter = 0;
-        let faceStr = "smiling";
+        var counter = 0;
+        var faceStr = "smiling";
         setInterval(function(){
             if(counter==3) counter=0;
             
             smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
             counter++;
-        },2000);
-
-
-        if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
+        },1000);
         var xxx_score = parseInt(score.text());
         if(xxx_score<20){
             restartTextObj.text("That so Poor of You!");
@@ -473,7 +444,36 @@ $(function() {
             faceStr = "happy";
             smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
         }
+    }
 
+    function setHighScore() {
+        if (high_score < parseInt(score.text())) {
+            high_score = parseInt(score.text());
+            localStorage.setItem('high_score', parseInt(score.text()));
+        }
+        $('#high_score').text(high_score);
+    }
+
+    /* ------------------------------GAME CODE ENDS HERE------------------------------------------- */
+
+
+    function collision($div1, $div2) {
+        var x1 = $div1.offset().left;
+        var y1 = $div1.offset().top;
+        var h1 = $div1.outerHeight(true);
+        var w1 = $div1.outerWidth(true);
+        var b1 = y1 + h1;
+        var r1 = x1 + w1;
+        var x2 = $div2.offset().left;
+        var y2 = $div2.offset().top;
+        var h2 = $div2.outerHeight(true);
+        var w2 = $div2.outerWidth(true);
+        var b2 = y2 + h2;
+        var r2 = x2 + w2;
+        
+
+
+        if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
         return true;
     }
 
