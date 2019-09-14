@@ -98,6 +98,7 @@ body {
         padding-top:40%;
         z-index: 1;
         width: 100%;
+        background:url('./image/offer_background.jpeg');
     }
 
     .leadership .boardScore >div{

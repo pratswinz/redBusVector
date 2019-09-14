@@ -6,8 +6,10 @@ var uniqueUserIDCheck = function(userID, callback){
         "type": "GET",
         "success": function(data){
             if (typeof data === "boolean") {
-                if (typeof callback === "function") {
+                if (typeof callback === "function" && data) {
                     activateSession(userID, callback);
+                }else{
+                    callback(null, data);
                 }
             }
         },
@@ -179,6 +181,8 @@ $(function() {
                 $('.overlay_input_container')[0].classList.add('hidden');
                 $('#main_container')[0].classList.remove('hidden');
                 anim_id = requestAnimationFrame(repeat);
+            }else{
+                $('.error')[0].classList.remove('hidden');
             }
         })
     });
@@ -200,9 +204,10 @@ $(function() {
                 let board = `<div class="row header"><span></span><span>LEADERBOARD</span></div>`;
                 for(let i = 0; i < data.toppers.length; i++){
                     board += `<div class="row ${data.toppers[i].userId === userId ? 'current_user' : ''}">
+                                <span>Rank ${i + 1}</span>
                                 <span class="profile"></span>
                                 <span class="userId">${data.toppers[i].userId}</span>
-                                <span class="score">${data.toppers[i].totalScore}</span>
+                                <span class="score">${data.toppers[i].totalScore} scores</span>
                             </div>`
                 }
                 $(".boardScore").html(board);
