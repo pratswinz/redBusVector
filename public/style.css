@@ -131,14 +131,14 @@ body {
     }
 
     .boardScore >div:first-child>span:first-child{
-        background:url(./image/trophy.svg);
+        background:url(./svg/trophy.svg);
         background-size: contain;
         height:24px;
         width:24px;
     }
 
     .profile{
-        background:url(./image/user.svg);
+        background:url(./svg/user.svg);
         background-size: contain;
         height:24px;
         width:24px;
