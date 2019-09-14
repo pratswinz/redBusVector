@@ -61,7 +61,7 @@ var getScores = function (userId, callback) {
         "url": url,
         "type": "GET",
         "success": function (data) {
-            if (typeof data === "string") {
+            if (data) {
                 if (typeof callback === "function") {
                     callback(null, data);
                 }
@@ -175,18 +175,19 @@ $(function() {
         $('#closeNav').click();
         getScores(userId, function(error, data){
             if(!error && data){
-                let board = '';
-                for(let i = 0; i < data.length; i++){
+                let board = `<div class="row header"><span></span><span>LEADERBOARD</span></div>`;
+                for(let i = 0; i < data.toppers.length; i++){
                     board += `<div class="row">
-                                <span class="userId">${data[i].userId}</span>
-                                <span class="score">${data[i].totalScore}</span>
+                                <span class="profile"></span>
+                                <span class="userId">${data.toppers[i].userId}</span>
+                                <span class="score">${data.toppers[i].totalScore}</span>
                             </div>`
                 }
-                $(".leadership").html(board);
+                $(".boardScore").html(board);
             }else{
-                $(".boardScore").html(`<span class="no_data"></span>
+                $(".boardScore").html(`<div><span class="no_data"></span>
                                          <span>Data is not available currently</span>
-                                        `);
+                                        </div>`);
             }
             $(".leadership")[0].classList.remove('hidden');
 

@@ -37,7 +37,6 @@ body {
         height:100vh;
         background:rgba(0, 0, 0, 1);
         z-index: 1;
-        visibility: hidden;
     }
 
     .inputBox{
@@ -101,10 +100,42 @@ body {
         width: 100%;
     }
 
-    .leadership>div{
+    .leadership .boardScore >div{
         display: flex;
-        flex-direction: column;
         align-items: center;
+        justify-content: space-around;
+        margin: 0 8px;
+        background: #ffffff;
+        margin: 8px 0px;
+    }
+
+    .boardScore{
+        background:#EFE7D6;
+        padding-bottom: 8px;
+        margin:8px;
+    }
+
+    .boardScore >div:first-child{
+        background:#F7AD31;
+        color: #ffffff;
+        padding: 0.5em;
+        border-top-right-radius: 8px;
+        border-top-left-radius: 8px;
+        justify-content: space-between
+    }
+
+    .boardScore >div:first-child>span:first-child{
+        background:url(./image/trophy.svg);
+        background-size: contain;
+        height:24px;
+        width:24px;
+    }
+
+    .profile{
+        background:url(./image/user.svg);
+        background-size: contain;
+        height:24px;
+        width:24px;
     }
 
     .leadership .no_data{
