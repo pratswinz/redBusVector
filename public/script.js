@@ -55,13 +55,13 @@ var updateScores = function (options, callback) {
     });
 };
 
-var getScores = function (callback) {
-    var url = "/api/leaderboard" + "?v=" + new Date().getTime();
+var getScores = function (userId, callback) {
+    var url = "/api/leaderboard?userId="+userId;
     $.ajax({
         "url": url,
         "type": "GET",
         "success": function (data) {
-            if (typeof data === "string") {
+            if (data) {
                 if (typeof callback === "function") {
                     callback(null, data);
                 }
@@ -162,6 +162,39 @@ $(function() {
     });
     /**
      * ===========end here=============
+     */
+
+    /**
+     * on click leadership board
+     */
+    $("#closeBoard").on('click', function(){
+        $(".leadership")[0].classList.add('hidden');
+    });
+
+    $('#board').on('click', function(){
+        $('#closeNav').click();
+        getScores(userId, function(error, data){
+            if(!error && data){
+                let board = `<div class="row header"><span></span><span>LEADERBOARD</span></div>`;
+                for(let i = 0; i < data.toppers.length; i++){
+                    board += `<div class="row ${data.toppers[i].userId === userId ? 'current_user' : ''}">
+                                <span class="profile"></span>
+                                <span class="userId">${data.toppers[i].userId}</span>
+                                <span class="score">${data.toppers[i].totalScore}</span>
+                            </div>`
+                }
+                $(".boardScore").html(board);
+            }else{
+                $(".boardScore").html(`<div><span class="no_data"></span>
+                                         <span>Data is not available currently</span>
+                                        </div>`);
+            }
+            $(".leadership")[0].classList.remove('hidden');
+
+        })
+    });
+    /**
+     * ============end here ===============
      */
 
     /**
@@ -306,7 +339,7 @@ $(function() {
             score.text(parseInt(score.text()) + 1);
         }
         
-        if (score_counter % 300 == 0) {
+        if (score_counter % 500 == 0) {
             speed++;
             if(speed>5){
                 audio.src = './audio/carAccelaratingAudio.mp3';
@@ -367,6 +400,50 @@ $(function() {
         };
         updateScores(options);
         setHighScore();
+        var counter = 0;
+        var faceStr = "smiling";
+        setInterval(function(){
+            if(counter==3) counter=0;
+            
+            smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
+            counter++;
+        },1000);
+        var xxx_score = parseInt(score.text());
+        if(xxx_score<20){
+            restartTextObj.text("That so Poor of You!");
+            faceStr = "sad";
+            smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
+        }
+        else if(xxx_score>=20 && xxx_score<30){
+            restartTextObj.text("That was Bad");
+            faceStr = "sad";
+            smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
+        }
+        else if(xxx_score>=30 && xxx_score<60){
+            restartTextObj.text("Good , You can do Better");
+            faceStr = "smiling";
+            smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
+        }
+        else if(xxx_score>=60 && xxx_score<90){
+            restartTextObj.text("Great! Marching towards the Peak");
+            faceStr = "smiling";
+            smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
+        }
+        else if(xxx_score>=90 && xxx_score<120){
+            restartTextObj.text("Voilla!!Race for more ");
+            faceStr = "happy";
+            smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
+        }
+        else if(xxx_score>=120 && xxx_score<150){
+            restartTextObj.text("Superb !Awesome! ");
+            faceStr = "happy";
+            smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
+        }
+        else if(xxx_score>=150){
+            restartTextObj.text("Fantabulous !Outstanding! ");
+            faceStr = "happy";
+            smileyImgObj.attr("src", "./svg/"+faceStr+counter+".svg");
+        }
     }
 
     function setHighScore() {
@@ -393,39 +470,10 @@ $(function() {
         var w2 = $div2.outerWidth(true);
         var b2 = y2 + h2;
         var r2 = x2 + w2;
+        
 
 
         if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
-        var xxx_score = parseInt(score.text());
-        if(xxx_score<20){
-            restartTextObj.text("That so Poor of You!");
-            smileyImgObj.attr("src", "./svg/sad0.svg");
-        }
-        else if(xxx_score>=20 && xxx_score<30){
-            restartTextObj.text("That was Bad");
-            smileyImgObj.attr("src", "./svg/sad1.svg");
-        }
-        else if(xxx_score>=30 && xxx_score<60){
-            restartTextObj.text("Good , You can do Better");
-            smileyImgObj.attr("src", "./svg/smiling0.svg");
-        }
-        else if(xxx_score>=60 && xxx_score<90){
-            restartTextObj.text("Great! Marching towards the Peak");
-            smileyImgObj.attr("src", "./svg/smiling1.svg");
-        }
-        else if(xxx_score>=90 && xxx_score<120){
-            restartTextObj.text("Voilla!! ");
-            smileyImgObj.attr("src", "./svg/smiling2.svg");
-        }
-        else if(xxx_score>=120 && xxx_score<150){
-            restartTextObj.text("Superb !Awesome! ");
-            smileyImgObj.attr("src", "./svg/happy0.svg");
-        }
-        else if(xxx_score>=150){
-            restartTextObj.text("Fantabulous !Outstanding! ");
-            smileyImgObj.attr("src", "./svg/happy1.svg");
-        }
-
         return true;
     }
 
