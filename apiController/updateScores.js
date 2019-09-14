@@ -7,24 +7,30 @@ module.exports = (req, res, next) => {
             const dbo = connector.db("vector-db");
             const query = { userId: req.query.userId };
             const sessionId = req.query.sessionId || "";
-            const score = typeof req.query.score === "number" ? req.query.score : 0;
+            const score = !isNaN(req.query.score) ? parseInt(req.query.score) : 0;
             if (sessionId != "") {
                 dbo.collection("scores").find(query).forEach((doc) => {
-                    doc.totalScore += score;
-                    doc.sessionList.forEach(event => {
-                        if (event.sessionId === sessionId) {
-                            event.sessionEndTime = moment().format("YYYY-MM-DD HH:mm");
-                            event.score = score;
-                            doc.sessionActive = false;
-                        }
-                    })
-                    dbo.collection("scores").save(doc);
-                    // connector.close();
-                    res.send("Updated records");
+                    if (doc.sessionActive) {
+                        doc.totalScore += score;
+                        doc.sessionList.forEach(event => {
+                            if (event.sessionId === sessionId) {
+                                sessionActive = true;
+                                event.sessionEndTime = moment().parseZone().format("YYYY-MM-DD HH:mm");
+                                event.score = score;
+                                doc.sessionActive = false;
+                            }
+                        })
+                        dbo.collection("scores").save(doc);
+                        // connector.close();
+                        res.end("Updated records");
+                        return;
+                    }
                 })
             } else {
-                res.send("");
+                res.end("Session Id not received");
+                return;
             }
+            res.end("Updated records");
         }).catch(err => {
             console.log("Error ", err);
         })

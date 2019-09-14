@@ -356,7 +356,7 @@ $(function() {
         }
 
         score_counter++;
-        
+        audio.muted = false;
         audio.play();
 
         if (score_counter % 20 == 0) {
