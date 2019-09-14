@@ -15,22 +15,22 @@ module.exports = (req, res, next) => {
                         doc.sessionList.forEach(event => {
                             if (event.sessionId === sessionId) {
                                 sessionActive = true;
-                                event.sessionEndTime = moment().format("YYYY-MM-DD HH:mm");
+                                event.sessionEndTime = moment().parseZone().format("YYYY-MM-DD HH:mm");
                                 event.score = score;
                                 doc.sessionActive = false;
                             }
                         })
                         dbo.collection("scores").save(doc);
                         // connector.close();
-                        res.send("Updated records");
+                        res.end("Updated records");
                         return;
                     }
                 })
             } else {
-                res.send("Session Id not received");
+                res.end("Session Id not received");
                 return;
             }
-            res.send("Updated records");
+            res.end("Updated records");
         }).catch(err => {
             console.log("Error ", err);
         })

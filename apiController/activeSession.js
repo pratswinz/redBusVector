@@ -33,7 +33,7 @@ module.exports = (req, res, next) => {
                     sessionList: [
                         {
                             sessionId: sessionId,
-                            sessionStartTime: moment().format("YYYY-MM-DD HH:mm"),
+                            sessionStartTime: moment().parseZone().format("YYYY-MM-DD HH:mm"),
                             sessionEndTime: null,
                             score: 0
                         }
