@@ -315,6 +315,7 @@ body {
     background-image: url(./images/asfalt-dark.png);
     font-size: 30px;
     margin-top: 20%;
+    width: 90%;
 }
 .small_text{
     font-size: 15px;
