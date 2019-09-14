@@ -8,9 +8,9 @@ module.exports = (req, res, next) => {
         const query = { userId: req.query.userId };
         dbo.collection("scores").find(query).toArray((err, result) => {
             if(result.length === 0){
-                res.send("Whoo!!! Your user id is saved");
+                res.send(true);
             }else{
-                res.send("username already exists");
+                res.send(false);
             }
         })
     })
