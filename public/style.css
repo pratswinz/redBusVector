@@ -8,11 +8,11 @@ body {
 }
 
 .hidden{
-    display: none;
+    visibility: hidden;
 }
 
 .hide{
-    left:-500px;
+    left:-100%;
 }
 
 #openNav{
@@ -37,7 +37,6 @@ body {
         height:100vh;
         background:rgba(0, 0, 0, 1);
         z-index: 1;
-        visibility: hidden;
     }
 
     .inputBox{
@@ -90,6 +89,68 @@ body {
         overflow: hidden;
         background-image: url(./image/asfalt-dark.png);
     }
+
+    .leadership{
+        position: fixed;
+        top:0;
+        height:100vh;
+        background: #ffffff;
+        padding-top:40%;
+        z-index: 1;
+        width: 100%;
+    }
+
+    .leadership .boardScore >div{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin: 0 8px;
+        background: #ffffff;
+        margin: 8px 0px;
+        padding: 8px;
+    }
+
+    .boardScore{
+        background:#EFE7D6;
+        padding-bottom: 8px;
+        margin:8px;
+    }
+
+    .current_user{
+        background: #F70041 !important;
+        color: #fff;
+    }
+
+    .boardScore >div:first-child{
+        background:#F7AD31;
+        color: #ffffff;
+        padding: 0.5em;
+        border-top-right-radius: 8px;
+        border-top-left-radius: 8px;
+        justify-content: space-between
+    }
+
+    .boardScore >div:first-child>span:first-child{
+        background:url(./image/trophy.svg);
+        background-size: contain;
+        height:24px;
+        width:24px;
+    }
+
+    .profile{
+        background:url(./image/user.svg);
+        background-size: contain;
+        height:24px;
+        width:24px;
+    }
+
+    .leadership .no_data{
+        background: url(./image/stop.png);
+        width: 100px;
+        height: 95px;
+        display: block;
+        background-size: contain;
+    }
 }
 
 @media screen 
@@ -107,6 +168,9 @@ body {
         background-color: rgb(98, 99, 98);/* linear-gradient(rgb(75, 74, 74), rgb(213, 218, 213)); */
         overflow: hidden;
         background-image: url(./image/asfalt-dark.png);
+    }
+    .game_controls_button{
+        display: none;
     }
 }
 

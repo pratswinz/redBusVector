@@ -55,13 +55,13 @@ var updateScores = function (options, callback) {
     });
 };
 
-var getScores = function (callback) {
-    var url = "/api/leaderboard" + "?v=" + new Date().getTime();
+var getScores = function (userId, callback) {
+    var url = "/api/leaderboard?userId="+userId;
     $.ajax({
         "url": url,
         "type": "GET",
         "success": function (data) {
-            if (typeof data === "string") {
+            if (data) {
                 if (typeof callback === "function") {
                     callback(null, data);
                 }
@@ -162,6 +162,39 @@ $(function() {
     });
     /**
      * ===========end here=============
+     */
+
+    /**
+     * on click leadership board
+     */
+    $("#closeBoard").on('click', function(){
+        $(".leadership")[0].classList.add('hidden');
+    });
+
+    $('#board').on('click', function(){
+        $('#closeNav').click();
+        getScores(userId, function(error, data){
+            if(!error && data){
+                let board = `<div class="row header"><span></span><span>LEADERBOARD</span></div>`;
+                for(let i = 0; i < data.toppers.length; i++){
+                    board += `<div class="row ${data.toppers[i].userId === userId ? 'current_user' : ''}">
+                                <span class="profile"></span>
+                                <span class="userId">${data.toppers[i].userId}</span>
+                                <span class="score">${data.toppers[i].totalScore}</span>
+                            </div>`
+                }
+                $(".boardScore").html(board);
+            }else{
+                $(".boardScore").html(`<div><span class="no_data"></span>
+                                         <span>Data is not available currently</span>
+                                        </div>`);
+            }
+            $(".leadership")[0].classList.remove('hidden');
+
+        })
+    });
+    /**
+     * ============end here ===============
      */
 
     /**
