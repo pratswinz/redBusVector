@@ -1,5 +1,26 @@
 /* Prateek Srivastava */
 
+var uniqueUserIDCheck = function(userID, callback){
+    $.ajax({
+        "url": "/api/uniqueid?userId="+userID,
+        "type": "GET",
+        "success": function(data){
+            if (typeof data === "boolean") {
+                if (typeof callback === "function") {
+                    activateSession(userID, callback);
+                }
+            }
+        },
+        "error": function (err) {
+            console.log("Error", err);
+            if (typeof callback === "function") {
+                callback(err, null);
+            }
+        }
+    })
+}
+
+
 var activateSession = function (userId, callback) {
     $.ajax({
         "url": "/api/activeSession?userId=" + userId + "&v=" + new Date().getTime(),
@@ -148,7 +169,7 @@ $(function() {
 
     $('#submit').on('click', function(){
         userId = document.getElementById('userID').value;
-        activateSession(userId, function(error, data){
+        uniqueUserIDCheck(userId, function(error, data){
             if (error) {
                 $('.error')[0].classList.remove('hidden');
             } else if (data) {
@@ -157,6 +178,7 @@ $(function() {
                 sessionID = data;
                 $('.overlay_input_container')[0].classList.add('hidden');
                 $('#main_container')[0].classList.remove('hidden');
+                anim_id = requestAnimationFrame(repeat);
             }
         })
     });
@@ -322,7 +344,9 @@ $(function() {
     }
 
     /* Move the cars and lines */
-    anim_id = requestAnimationFrame(repeat);
+    if(userId && sessionID){
+        anim_id = requestAnimationFrame(repeat);
+    }
 
     function repeat() {
         if (collision(car, car_1) || collision(car, car_2) || collision(car, car_3) || collision(car,car_4)) {
