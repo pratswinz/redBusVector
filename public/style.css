@@ -466,6 +466,11 @@ body {
     text-align: center;
     margin: 3px 10px;
     flex-grow: 1;
+    display: flex;
+    opacity: .8;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
 }
 
 

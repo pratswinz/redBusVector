@@ -143,9 +143,16 @@
                 <div class="boardScore"></div>
         </div>
     </div>
+    <script>
+        var goFS = document.getElementById("container");
+        goFS.addEventListener("click", function() {
+            document.body.requestFullscreen();
+        }, false);
+      </script>
     <script src="jquery.min.js"></script>
     <script src="script.js"></script>
     <script src="card.js"></script>
+
 </body>
 
 </html>
