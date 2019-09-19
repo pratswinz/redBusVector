@@ -419,8 +419,8 @@ $(function() {
         cancelAnimationFrame(move_left);
         cancelAnimationFrame(move_up);
         cancelAnimationFrame(move_down);
-        restart_div.slideDown();
-        restart_btn.focus();
+        //restart_div.slideDown();
+        //restart_btn.focus();
         
         var options = {
             "userId": userId,

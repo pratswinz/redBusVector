@@ -203,6 +203,7 @@ body {
     left: 60%;
     height: 80px;
     background-color: #d84f57;
+    animation: blinkingCarBody 1s infinite;
 }
 
 #car .f_light_l,#car .f_light_r{
@@ -211,9 +212,19 @@ body {
     animation: blinking 1s infinite;
 }
 
+
 #car_1 .f_light_l,#car_1 .f_light_r{
     animation: blinkingCarLight 1s infinite;
 }
+
+@keyframes blinkingGlass {
+    0%{
+      background-color: #484848;
+    }
+    100%{
+      background-color: #ffffff;
+    }
+  }
 
 @keyframes blinking {
     0%{
@@ -236,6 +247,18 @@ body {
     }
     100%{
       background-color: #d8fd31;
+    }
+  }
+
+  @keyframes blinkingCarBody {
+    0%{
+      background-color: rgb(250, 139, 139);
+    }
+    50%{
+      background-color: #d15a62;
+    }
+    100%{
+      background-color: #d80416;
     }
   }
 
@@ -439,25 +462,28 @@ body {
 .arrow{
     min-height: 30px;
     width: 30px;
+    background-color: #FFF;
     text-align: center;
+    margin: 3px 10px;
     flex-grow: 1;
 }
 
+
 .top_arrow_btn {
-    background: url('./svg/upArrow.svg') no-repeat center;
+    /* background: url('./svg/upArrow.svg') no-repeat center; */
 }
 
 .right_arrow_btn {
-    background: url('./svg/rightArrow.svg') no-repeat center;
+   /*  background: url('./svg/rightArrow.svg') no-repeat center; */
 
 }
 
 .bottom_arrow_btn {
-    background: url('./svg/downArrow.svg') no-repeat center;
-
+   /*  background: url('./svg/downArrow.svg') no-repeat center;
+ */
 }
 
 .left_arrow_btn {
-    background: url('./svg/leftArrow.svg') no-repeat center;
+   /*  background: url('./svg/leftArrow.svg') no-repeat center; */
 
 }
